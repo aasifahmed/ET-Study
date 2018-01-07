@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">ET-Study</string>
+    <string name="student">Student Details</string>
+    <string name="student_sub">View Student Profile!</string>
+    <string name="attendance">Attendance Details</string>
+    <string name="attendance_sub">View monthly/yearly Attendance report!</string>
+    <string name="exam">Exam Details</string>
+    <string name="exam_sub">View Exam results!</string>
+    <string name="fees">Fees Details</string>
+    <string name="fees_sub">View Fees paid history!</string>
+
+</resources>
