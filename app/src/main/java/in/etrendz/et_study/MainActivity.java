@@ -1,13 +1,26 @@
 package in.etrendz.et_study;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static boolean CheckInternet(Context context)
+    {
+        ConnectivityManager connec = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        android.net.NetworkInfo wifi = connec.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        android.net.NetworkInfo mobile = connec.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+
+        return wifi.isConnected() || mobile.isConnected();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +39,19 @@ public class MainActivity extends AppCompatActivity {
         lvCards.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Intent i = new Intent(MainActivity.this, ProfileActivity.class);
-                //If you wanna send any data to nextActicity.class you can use
+                Log.i("Item clicked is at :", "qqqqqqqqqqqq " + position);
+                if(position == 0) {
+                    Intent i = new Intent(MainActivity.this, ProfileActivity.class);
+                    //If you wanna send any data to nextActicity.class you can use
 //                i.putExtra(String key, value.get(position));
+                    if (CheckInternet(getApplicationContext())) {
+                        startActivity(i);
+                    } else
+                        Toast.makeText(getApplicationContext(), "Unable to load content. Check your Internet connection.", Toast.LENGTH_SHORT).show();
+//                startActivity(i);
+                } else {
 
-                startActivity(i);
+                }
             }
         });
     }
